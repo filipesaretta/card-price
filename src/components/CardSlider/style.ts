@@ -89,11 +89,27 @@ export const Price = styled.p`
 export const PaymentToggle = styled.div`
   display: grid;
   grid-template-columns: auto auto auto;
-  gap: 1rem;
+  gap: 0.5rem;
   justify-content: center;
+  align-items: center;
 
   font-size: 0.875rem;
   color: ${(props) => props.theme.grayBlue800};
+
+  @media (min-width: 575px) {
+    gap: 1rem;
+  }
+  p {
+    line-height: 1.8;
+  }
+
+  p span {
+    padding: 4px 6px;
+    border-radius: 15px;
+    color: ${(props) => props.theme.red300};
+    font-weight: bold;
+    background-color: #ff8c6640;
+  }
 `;
 
 export const Toggle = styled.label`
