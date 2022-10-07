@@ -13,6 +13,34 @@ import {
 import check from "../../assets/icon-check.svg";
 
 export function CardSlider() {
+  function getScreenSize() {
+    const { innerWidth } = window;
+    return { innerWidth };
+  }
+
+  const [screenWidth, setScreenWidth] = useState(getScreenSize());
+
+  useEffect(() => {
+    function handleScreenResize() {
+      setScreenWidth(getScreenSize());
+    }
+
+    window.addEventListener("resize", handleScreenResize);
+    return () => {
+      window.removeEventListener("resize", handleScreenResize);
+    };
+  }, []);
+
+  const min = 0;
+  const max = 1000000;
+  const [pageViews, setPageViews] = useState(0);
+
+  function handleSliderPageViews(e: FormEvent) {
+    const target = e.target as HTMLInputElement;
+
+    setPageViews(target.value);
+  }
+
   return (
     <Card>
       <SliderSection>
