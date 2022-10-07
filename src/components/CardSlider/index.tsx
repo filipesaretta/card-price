@@ -11,6 +11,7 @@ import {
 } from "./style";
 
 import check from "../../assets/icon-check.svg";
+import { FormEvent, useEffect, useState } from "react";
 
 export function CardSlider() {
   function getScreenSize() {
@@ -45,10 +46,17 @@ export function CardSlider() {
     <Card>
       <SliderSection>
         <PriceSection>
-          <PageViews>100K PAGEVIEWS</PageViews>
+          <PageViews>{pageViews}</PageViews>
           <Slider>
             <span>
-              <input type="range" />
+              <input
+                name="slider"
+                type="range"
+                min={min}
+                max={max}
+                step={10000}
+                onChange={handleSliderPageViews}
+              />
             </span>
           </Slider>
           <Price>
@@ -56,12 +64,17 @@ export function CardSlider() {
           </Price>
         </PriceSection>
         <PaymentToggle>
-          <span>Monthly Billing</span>
+          <p>Monthly Billing</p>
           <Toggle>
             <input type="checkbox" />
             <span></span>
           </Toggle>
-          <span>Yearly Billing 25% discount</span>
+          <p>
+            Yearly Billing{" "}
+            <span>
+              {screenWidth.innerWidth > 525 ? " 25% discount" : "-25%"}
+            </span>
+          </p>
         </PaymentToggle>
       </SliderSection>
       <Details>
