@@ -13,11 +13,11 @@ import {
 import check from "../../assets/icon-check.svg";
 import { FormEvent, useEffect, useState } from "react";
 
-interface RatesProps {
-  id: string;
-  size: number;
-  price: number;
-}
+// interface RatesProps {
+//   id: string;
+//   size: number;
+//   price: number;
+// }
 
 export function CardSlider() {
   function getScreenSize() {
@@ -59,7 +59,7 @@ export function CardSlider() {
 
   const [isAnnual, setIsAnnual] = useState(false);
 
-  const rates: RatesProps[] = [
+  const rates = [
     {
       id: "SMALL",
       size: 100,
@@ -89,25 +89,31 @@ export function CardSlider() {
 
     const pageView = Number(pageViews) / 1000;
 
-    function result(price: RatesProps) {
-      const result = price!.price;
+    function result(price: number) {
+      const result = price;
       return isAnnual
         ? Math.floor(result * 12 - ((result * 12) / 100) * 25)
-        : price?.price;
+        : price;
     }
 
     if (pageView >= SMALL && pageView < MEDIUM) {
-      const price = rates.find((item) => item.size === SMALL);
-      return `$${result(price)} ${isAnnual ? "/yearly" : "/monthly"}`;
+      const price = rates.find((item) => item.size === SMALL)?.price;
+      if (price) {
+        return `$${result(price)} ${isAnnual ? "/yearly" : "/monthly"}`;
+      }
     }
     if (pageView >= MEDIUM && pageView < BIG) {
-      const price = rates.find((item) => item.size === MEDIUM);
-      return `$${result(price)} ${isAnnual ? "/yearly" : "/monthly"}`;
+      const price = rates.find((item) => item.size === MEDIUM)?.price;
+      if (price) {
+        return `$${result(price)} ${isAnnual ? "/yearly" : "/monthly"}`;
+      }
     }
     if (pageView >= BIG && pageView < ENTERPRISE) {
-      const price = rates.find((item) => item.size === BIG);
+      const price = rates.find((item) => item.size === BIG)?.price;
 
-      return `$${result(price)} ${isAnnual ? "/yearly" : "/monthly"}`;
+      if (price) {
+        return `$${result(price)} ${isAnnual ? "/yearly" : "/monthly"}`;
+      }
     }
 
     return "Contact us";
